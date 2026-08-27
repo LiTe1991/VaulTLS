@@ -40,7 +40,7 @@ services:
     environment:
       - "VAULTLS_LOG_LEVEL=trace"
       - "VAULTLS_API_SECRET=cpCeMZga+H72Ux99y3v+Ht2IDH2NEClh40UTT4Mrxm4="
-      - "VAULTLS_URL=http://localhost/"
+      - "VAULTLS_URL=http://localhost:8080/"
       - "VAULTLS_MAIL_HOST=mailhog"
       - "VAULTLS_MAIL_PORT=1025"
       - "VAULTLS_MAIL_FROM=test@vaultls.dev"
@@ -53,7 +53,7 @@ services:
       - "VAULTLS_INSECURE=true"
       - "VAULTLS_ACME_DNS_RESOLVER=127.0.0.1:5353"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -82,7 +82,7 @@ services:
         condition: service_healthy
     network_mode: "service:authelia"
     environment:
-      - "VAULTLS_URL=http://127.0.0.1/"
+      - "VAULTLS_URL=http://127.0.0.1:8080/"
     volumes:
       - http_challenge_vol:/challenges
     entrypoint: ["pytest", "/app/"]
