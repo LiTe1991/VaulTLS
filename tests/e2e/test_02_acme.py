@@ -523,7 +523,7 @@ def test_authenticated_jws_guard_unknown_account():
     url = requests.get("http://127.0.0.1:8080/api/acme/directory").json()["newOrder"]
     resp = acme_post(
         client_key, url, {"identifiers": []}, nonce,
-        kid="http://localhost/api/acme/account/999999",
+        kid="http://localhost:8080/api/acme/account/999999",
     )
     assert resp.status_code == 400
     assert "accountDoesNotExist" in resp.json().get("type", "")
