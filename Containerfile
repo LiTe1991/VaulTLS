@@ -35,6 +35,8 @@ COPY --from=frontend-builder /app/frontend/dist/ /usr/share/nginx/html/
 COPY container/nginx.conf /etc/nginx/nginx.conf
 COPY --from=backend-builder /app/backend/backend /app/bin/backend
 
+RUN chown -R nginx:nginx /app/data
+
 EXPOSE 8080
 
 # Prepare init system
